@@ -34,3 +34,21 @@ class Task(Base):
     is_completed = Column(Boolean, default=False, nullable=False)
 
     goal = relationship("Goal", back_populates="tasks")
+    subtasks = relationship(
+        "SubTask",
+        back_populates="task",
+        cascade="all, delete-orphan",
+        order_by="SubTask.id",
+    )
+
+
+class SubTask(Base):
+    __tablename__ = "subtasks"
+
+    id = Column(Integer, primary_key=True, index=True)
+    task_id = Column(Integer, ForeignKey("tasks.id"), nullable=False, index=True)
+    title = Column(String(200), nullable=False)
+    description = Column(Text, nullable=True)
+    is_completed = Column(Boolean, default=False, nullable=False)
+
+    task = relationship("Task", back_populates="subtasks")

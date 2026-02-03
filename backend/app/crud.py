@@ -60,3 +60,29 @@ def update_task(db: Session, task: models.Task, task_in: schemas.TaskUpdate) -> 
 def delete_task(db: Session, task: models.Task) -> None:
     db.delete(task)
     db.commit()
+
+
+def create_subtask(db: Session, task: models.Task, subtask_in: schemas.SubTaskCreate) -> models.SubTask:
+    subtask = models.SubTask(**subtask_in.dict(), task=task)
+    db.add(subtask)
+    db.commit()
+    db.refresh(subtask)
+    return subtask
+
+
+def get_subtask(db: Session, subtask_id: int) -> models.SubTask | None:
+    return db.query(models.SubTask).filter(models.SubTask.id == subtask_id).first()
+
+
+def update_subtask(db: Session, subtask: models.SubTask, subtask_in: schemas.SubTaskUpdate) -> models.SubTask:
+    data = subtask_in.dict(exclude_unset=True)
+    for key, value in data.items():
+        setattr(subtask, key, value)
+    db.commit()
+    db.refresh(subtask)
+    return subtask
+
+
+def delete_subtask(db: Session, subtask: models.SubTask) -> None:
+    db.delete(subtask)
+    db.commit()

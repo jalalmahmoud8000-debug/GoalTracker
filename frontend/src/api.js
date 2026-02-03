@@ -41,3 +41,17 @@ export const updateTask = async (taskId, payload) => {
 export const deleteTask = async (taskId) => {
   await api.delete(`/tasks/${taskId}`);
 };
+
+export const createSubtask = async (taskId, payload) => {
+  const { data } = await api.post(`/tasks/${taskId}/subtasks`, payload);
+  return data;
+};
+
+export const updateSubtask = async (subtaskId, payload) => {
+  const { data } = await api.put(`/subtasks/${subtaskId}`, payload);
+  return data;
+};
+
+export const deleteSubtask = async (subtaskId) => {
+  await api.delete(`/subtasks/${subtaskId}`);
+};

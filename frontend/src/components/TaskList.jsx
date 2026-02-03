@@ -1,27 +1,23 @@
 import React from "react";
+import TaskItem from "./TaskItem.jsx";
 
-const TaskList = ({ tasks, onToggle, onDelete }) => {
+const TaskList = ({ tasks, onToggle, onDelete, onSubtaskCreate, onSubtaskToggle, onSubtaskDelete }) => {
   if (!tasks.length) {
     return <p className="muted">لا توجد مهام بعد.</p>;
   }
 
   return (
-    <div className="task-list">
+    <div className="task-board">
       {tasks.map((task) => (
-        <div key={task.id} className="task">
-          <div>
-            <h4>{task.title}</h4>
-            <p>{task.description || "لا يوجد وصف."}</p>
-          </div>
-          <div className="task__actions">
-            <button className="secondary" onClick={() => onToggle(task)} type="button">
-              {task.is_completed ? "تمييز كغير مكتملة" : "تمييز كمكتملة"}
-            </button>
-            <button className="danger" onClick={() => onDelete(task.id)} type="button">
-              حذف
-            </button>
-          </div>
-        </div>
+        <TaskItem
+          key={task.id}
+          task={task}
+          onToggle={onToggle}
+          onDelete={onDelete}
+          onSubtaskCreate={onSubtaskCreate}
+          onSubtaskToggle={onSubtaskToggle}
+          onSubtaskDelete={onSubtaskDelete}
+        />
       ))}
     </div>
   );
