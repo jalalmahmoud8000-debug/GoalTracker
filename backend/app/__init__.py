@@ -1,0 +1,1 @@
+"""GoalTracker backend package."""
