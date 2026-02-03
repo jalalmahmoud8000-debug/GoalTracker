@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "goal-tracker"
+version = "0.1.0"
+description = "A minimal GoalTracker Python application."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+  { name = "GoalTracker Team" }
+]
+
+[project.scripts]
+goal-tracker = "goal_tracker.app:main"
