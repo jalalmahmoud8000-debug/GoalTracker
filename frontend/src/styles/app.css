@@ -175,17 +175,34 @@ textarea {
 .task-card {
   background: #ffffff;
   border-radius: 16px;
-  padding: 1.25rem;
+  padding: 1.25rem 1.25rem 1.25rem 2.75rem;
   border: 1px solid rgba(67, 97, 238, 0.1);
   box-shadow: 0 14px 30px rgba(31, 42, 68, 0.08);
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
 }
 
 .task-card--done {
   border-color: rgba(46, 196, 182, 0.5);
   background: #f0fdfa;
+}
+
+.task-card--done::before {
+  background: #2ec4b6;
+  box-shadow: 0 0 0 6px rgba(46, 196, 182, 0.2);
+}
+.task-card::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.25rem;
+  top: 1.35rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #4361ee;
+  box-shadow: 0 0 0 6px rgba(67, 97, 238, 0.12);
 }
 
 .task-card__header {
@@ -204,10 +221,11 @@ textarea {
 .subtasks {
   background: #f9fafb;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 2.25rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  position: relative;
 }
 
 .subtasks__header {
@@ -219,22 +237,52 @@ textarea {
 .subtask-list {
   display: grid;
   gap: 0.75rem;
+  position: relative;
+}
+
+.subtask-list::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.6rem;
+  top: 0.25rem;
+  bottom: 0.25rem;
+  width: 2px;
+  background: linear-gradient(180deg, rgba(67, 97, 238, 0.45), rgba(67, 97, 238, 0));
 }
 
 .subtask {
   background: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  padding: 0.75rem;
+  padding: 0.75rem 0.75rem 0.75rem 1.5rem;
   display: flex;
   justify-content: space-between;
   gap: 0.75rem;
   align-items: center;
+  position: relative;
+}
+
+.subtask::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.45rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #4361ee;
+  box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.12);
 }
 
 .subtask--done {
   border-color: #2ec4b6;
   background: #e8fffb;
+}
+
+.subtask--done::before {
+  background: #2ec4b6;
+  box-shadow: 0 0 0 4px rgba(46, 196, 182, 0.2);
 }
 
 .subtask__actions {
