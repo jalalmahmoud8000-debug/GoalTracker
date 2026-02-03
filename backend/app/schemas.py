@@ -7,6 +7,29 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, ConfigDict
 
 
+class SubTaskBase(BaseModel):
+    title: str = Field(..., min_length=1, max_length=200)
+    description: Optional[str] = None
+    is_completed: bool = False
+
+
+class SubTaskCreate(SubTaskBase):
+    pass
+
+
+class SubTaskUpdate(BaseModel):
+    title: Optional[str] = Field(None, min_length=1, max_length=200)
+    description: Optional[str] = None
+    is_completed: Optional[bool] = None
+
+
+class SubTaskOut(SubTaskBase):
+    id: int
+    task_id: int
+
+    model_config = ConfigDict(from_attributes=True)
+
+
 class TaskBase(BaseModel):
     title: str = Field(..., min_length=1, max_length=200)
     description: Optional[str] = None
@@ -26,6 +49,7 @@ class TaskUpdate(BaseModel):
 class TaskOut(TaskBase):
     id: int
     goal_id: int
+    subtasks: List[SubTaskOut] = []
 
     model_config = ConfigDict(from_attributes=True)
 

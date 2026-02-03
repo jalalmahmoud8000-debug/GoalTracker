@@ -16,6 +16,9 @@ const GoalCard = ({ goal, onDelete }) => {
         <Link className="primary" to={`/goals/${goal.id}`}>
           التفاصيل
         </Link>
+        <Link className="secondary" to={`/goals/${goal.id}/tasks`}>
+          عرض المهام
+        </Link>
         <button className="danger" onClick={() => onDelete(goal.id)} type="button">
           حذف
         </button>

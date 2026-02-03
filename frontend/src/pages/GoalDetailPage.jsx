@@ -5,6 +5,9 @@ import {
   deleteGoal,
   deleteTask,
   fetchGoal,
+  createSubtask,
+  deleteSubtask,
+  updateSubtask,
   updateGoal,
   updateTask,
 } from "../api.js";
@@ -58,6 +61,21 @@ const GoalDetailPage = () => {
 
   const handleTaskDelete = async (taskId) => {
     await deleteTask(taskId);
+    loadGoal();
+  };
+
+  const handleSubtaskCreate = async (taskId, payload) => {
+    await createSubtask(taskId, payload);
+    loadGoal();
+  };
+
+  const handleSubtaskToggle = async (subtask) => {
+    await updateSubtask(subtask.id, { is_completed: !subtask.is_completed });
+    loadGoal();
+  };
+
+  const handleSubtaskDelete = async (subtaskId) => {
+    await deleteSubtask(subtaskId);
     loadGoal();
   };
 
@@ -149,7 +167,14 @@ const GoalDetailPage = () => {
           <TaskForm onSubmit={handleTaskCreate} />
           <section className="card">
             <h3>المهام</h3>
-            <TaskList tasks={goal.tasks} onToggle={handleTaskToggle} onDelete={handleTaskDelete} />
+            <TaskList
+              tasks={goal.tasks}
+              onToggle={handleTaskToggle}
+              onDelete={handleTaskDelete}
+              onSubtaskCreate={handleSubtaskCreate}
+              onSubtaskToggle={handleSubtaskToggle}
+              onSubtaskDelete={handleSubtaskDelete}
+            />
           </section>
         </div>
       </div>
