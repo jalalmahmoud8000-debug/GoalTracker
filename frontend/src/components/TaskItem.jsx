@@ -21,11 +21,11 @@ const TaskItem = ({ task, onToggle, onDelete, onSubtaskCreate, onSubtaskToggle, 
   return (
     <article className={`task-card ${task.is_completed ? "task-card--done" : ""}`}>
       <header className="task-card__header">
-        <div>
-          <h4>{task.title}</h4>
-          <p>{task.description || "لا يوجد وصف."}</p>
+        <div className="task-card__tokens">
+          <h4 className="token token--title">{task.title}</h4>
+          <p className="token token--desc">{task.description || "لا يوجد وصف."}</p>
         </div>
-        <span className="badge">{task.is_completed ? "مكتملة" : "جارية"}</span>
+        <span className="badge token token--status">{task.is_completed ? "مكتملة" : "جارية"}</span>
       </header>
       <div className="task-card__actions">
         <button className="secondary" onClick={() => onToggle(task)} type="button">
@@ -44,9 +44,11 @@ const TaskItem = ({ task, onToggle, onDelete, onSubtaskCreate, onSubtaskToggle, 
           {task.subtasks?.length ? (
             task.subtasks.map((subtask) => (
               <div key={subtask.id} className={`subtask ${subtask.is_completed ? "subtask--done" : ""}`}>
-                <div>
-                  <p>{subtask.title}</p>
-                  {subtask.description && <span className="muted">{subtask.description}</span>}
+                <div className="subtask__content">
+                  <p className="token token--subtask-title">{subtask.title}</p>
+                  {subtask.description && (
+                    <span className="token token--subtask-desc">{subtask.description}</span>
+                  )}
                 </div>
                 <div className="subtask__actions">
                   <button className="secondary" onClick={() => onSubtaskToggle(subtask)} type="button">
